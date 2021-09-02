@@ -20,7 +20,9 @@ const inquirer = require('inquirer');
 const Manager = require('./classes/Manager');
 const Engineer = require('./classes/Engineer');
 const Intern = require('./classes/Intern');
+const fs = require('fs');
 var teamMembers =[];
+
 
 var addMoreTeam = true; //var to support do while loop, allows adding of unknown number of team members.
 
@@ -105,6 +107,7 @@ while (addMoreTeam==true)
 async function init() {
     await getManagerInfo();
     await askEmployeeDetails();
+    await generateHtml();
 
 }
 
@@ -199,8 +202,41 @@ async function getInternInfo() {
       });
 }
 
+async function generateHtml() {
+    // fs.writeFile('output.html', html);
+    // console.log(teamMembers);
+    
+    var teamData ="";
+
+    for (let index = 0; index < teamMembers.length; index++) {
+         teamData = teamData + `<p> ${JSON.stringify(teamMembers[index])} </p>\n`;
+        
+    }
+
+    console.log(teamData);
+
+    var html = `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Team</title>
+    </head>
+    <body>
+        <script src="./script.js"> </script>
+        <p id="team"> This is my team</p>
+        ${teamData}
+    </body>
+    </html>`
+
+    fs.writeFile('output.html', html, (err) =>
+  err ? console.error(err) : console.log('Success!')
+);
+
+}
+
 init();
 
-module.exports={
-    teamMembers
-};
+
+
