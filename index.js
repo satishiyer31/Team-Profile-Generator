@@ -218,17 +218,17 @@ async function generateHtml() {
       if(teamMembers[index].office_number){
         //Manager
            teamData = teamData + `<div class="card"> <div class="card-body"> <h5 class="card-title">${teamMembers[index].emp_name} - Manager </h5>\n`;
-           teamData = teamData + `<table> <tr> <td> ID: ${teamMembers[index].ID} </td> </tr> <tr> <td> Email: ${teamMembers[index].email} </td> </tr> <tr> <td> Office Number: ${teamMembers[index].office_number} </td> </tr>  </table></div></div>`
+           teamData = teamData + `<table> <tr> <td> ID: ${teamMembers[index].ID} </td> </tr> <tr> <td> Email: <a href="mailto:${teamMembers[index].email}"> ${teamMembers[index].email}</a>  </td> </tr> <tr> <td> Office Number: ${teamMembers[index].office_number} </td> </tr>  </table></div></div>`
           }   
       else if(teamMembers[index].github_username){
         //Engineer
         teamData = teamData + `<div class="card"> <div class="card-body"> <h5 class="card-title">${teamMembers[index].emp_name} - Engineer </h5>\n`;
-        teamData = teamData + `<table> <tr> <td> ID: ${teamMembers[index].ID} </td> </tr> <tr> <td> Email: ${teamMembers[index].email} </td> </tr> <tr> <td> GitHub: ${teamMembers[index].github_username} </td> </tr>  </table></div></div>`
+        teamData = teamData + `<table> <tr> <td> ID: ${teamMembers[index].ID} </td> </tr> <tr> <td> Email:<a href="mailto:${teamMembers[index].email}"> ${teamMembers[index].email}</a> </td> </tr> <tr> <td> GitHub:<a href="https://github.com/${teamMembers[index].github_username}"> ${teamMembers[index].github_username}</a></td> </tr>  </table></div></div>`
       }
       else {
         //Intern
         teamData = teamData + `<div class="card"> <div class="card-body"> <h5 class="card-title">${teamMembers[index].emp_name} - Intern </h5>\n`;
-        teamData = teamData + `<table> <tr> <td> ID: ${teamMembers[index].ID} </td> </tr> <tr> <td> Email: ${teamMembers[index].email} </td> </tr> <tr> <td> School: ${teamMembers[index].school} </td> </tr>  </table></div></div>`
+        teamData = teamData + `<table> <tr> <td> ID: ${teamMembers[index].ID} </td> </tr> <tr> <td> Email:<a href="mailto:${teamMembers[index].email}"> ${teamMembers[index].email}</a> </td> </tr> <tr> <td> School: ${teamMembers[index].school} </td> </tr>  </table></div></div>`
       }
       }
 
@@ -245,7 +245,7 @@ async function generateHtml() {
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     </head>
     <body>
-        
+    <h1>My Team </h1>
     <div class="row my-3">
         ${teamData}
     </div>
