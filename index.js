@@ -208,10 +208,29 @@ async function generateHtml() {
     
     var teamData ="";
 
-    for (let index = 0; index < teamMembers.length; index++) {
-         teamData = teamData + `<p> ${JSON.stringify(teamMembers[index])} </p>\n`;
+    // for (let index = 0; index < teamMembers.length; index++) {
+    //      teamData = teamData + `<p> ${JSON.stringify(teamMembers[index])} </p>\n`;
         
-    }
+    // }
+
+    for (let index = 0; index < teamMembers.length; index++) {
+
+      if(teamMembers[index].office_number){
+        //Manager
+           teamData = teamData + `<div class="card"> <div class="card-body"> <h5 class="card-title">${teamMembers[index].emp_name} - Manager </h5>\n`;
+           teamData = teamData + `<table> <tr> <td> ID: ${teamMembers[index].ID} </td> </tr> <tr> <td> Email: ${teamMembers[index].email} </td> </tr> <tr> <td> Office Number: ${teamMembers[index].office_number} </td> </tr>  </table></div></div>`
+          }   
+      else if(teamMembers[index].github_username){
+        //Engineer
+        teamData = teamData + `<div class="card"> <div class="card-body"> <h5 class="card-title">${teamMembers[index].emp_name} - Engineer </h5>\n`;
+        teamData = teamData + `<table> <tr> <td> ID: ${teamMembers[index].ID} </td> </tr> <tr> <td> Email: ${teamMembers[index].email} </td> </tr> <tr> <td> GitHub: ${teamMembers[index].github_username} </td> </tr>  </table></div></div>`
+      }
+      else {
+        //Intern
+        teamData = teamData + `<div class="card"> <div class="card-body"> <h5 class="card-title">${teamMembers[index].emp_name} - Intern </h5>\n`;
+        teamData = teamData + `<table> <tr> <td> ID: ${teamMembers[index].ID} </td> </tr> <tr> <td> Email: ${teamMembers[index].email} </td> </tr> <tr> <td> School: ${teamMembers[index].school} </td> </tr>  </table></div></div>`
+      }
+      }
 
     console.log(teamData);
 
@@ -221,12 +240,15 @@ async function generateHtml() {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Team</title>
+        <title>My Team</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     </head>
     <body>
-        <script src="./script.js"> </script>
-        <p id="team"> This is my team</p>
+        
+    <div class="row my-3">
         ${teamData}
+    </div>
     </body>
     </html>`
 
